@@ -5,4 +5,4 @@ BEGIN {print "<div class='review'>"}
     /- Rating:/ {$1=$2=""; rating = sprintf("<p class='Rating'><i>---%s---</i></p>", substr($0, 3))}
     /- Notes: / {print "<div class='Notes'>"; divend = "</div>"}
     /- Notes:/,/!./ { sub(/- Notes: /, ""); printf "%s\n", $0;}
-END {print divend; print rating; print "</div>"}
+END {print divend; print rating; print "</div><hr class='review-split'>"}

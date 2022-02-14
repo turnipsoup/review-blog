@@ -19,8 +19,7 @@ function addReviewToMainPage(review, divid) {
 	$("<h3 class='Title'></h3>").text(review["Title"]).appendTo(dotclass)
 	$("<h5 class='Genres'></h5>").text(review["Genres"]).appendTo(dotclass)
 	$("<h5 class='Platform'></h5>").text(review["Platform"]).appendTo(dotclass)
-	$("<p class='Rating'></p>").text(review["Rating"]).appendTo(dotclass)
-	$("<p class='Notes'></p>").text(review["Notes"]).appendTo(dotclass)
+	$("<div class='Notes'></div>").html(review["Notes"]).appendTo(dotclass)
+	$("<p class='Rating'></p>").html("<i>--- " + review["Rating"] + " ---</i>").appendTo(dotclass)
 }
-
 

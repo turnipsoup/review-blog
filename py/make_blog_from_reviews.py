@@ -22,12 +22,12 @@ def get_review_title(review) -> str:
 def get_review_subject(review, subject) -> str:
 	review_lines = review.split("\n")
 	notes_lines = ""
-	for line in review_lines:
-		if f"- {subject}:" in line:
+	for i in range(len(review_lines)):
+		if f"- {subject}:" in review_lines[i]:
 			if subject == "Notes": # If we are gathering the notes, then grab all
-				notes_lines += line  # of the remaining lines in the file
+				notes_lines += "<br>".join(review_lines[i:])  # of the remaining lines in the file
 			else:
-				return line.split(f"- {subject}:")[-1].strip()
+				return review_lines[i].split(f"- {subject}:")[-1].strip()
 
 	return notes_lines.replace(f"- {subject}:", "").strip()
 

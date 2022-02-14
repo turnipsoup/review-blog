@@ -1,0 +1,23 @@
+body {
+	background-color: #FBF7F4;
+}
+
+h1 {
+	margin: auto;
+	text-align: center;
+}
+
+.review-split {
+	width: 45%;
+}
+
+.title-rule {
+	width: 60%;
+}
+
+.review {
+	width: 500px;
+	margin: auto;
+}
+
+

@@ -3,6 +3,8 @@
 
 import os
 import json
+import datetime
+import platform
 
 BLOG_PATH = "/www/gm/g/galleywest"
 REVIEWS = f"{BLOG_PATH}/reviews"
@@ -40,7 +42,7 @@ def get_review_subjects(review) -> list[str]:
 			return subjline
 
 
-def create_review_object(review):
+def create_review_object(review) -> dict[str, str]:
 	subjects = ["Genres", "Platform", "Start", "End", "Rating", "Notes"]
 	review_object = {}
 	review_lines = review.split("\n")
@@ -50,6 +52,12 @@ def create_review_object(review):
 	for subject in subjects:
 		review_object[subject] = get_review_subject(review, subject)
 	return review_object
+
+def create_info_object() -> str:
+	infoobj = {}
+	infoobj["update_time"] = str(datetime.datetime.now())
+	infoobj["platform"] = platform.system()
+	return infoobj
 
 if __name__ == "__main__":
 	blog_contents = sorted(os.listdir(REVIEWS))
@@ -61,9 +69,17 @@ if __name__ == "__main__":
 		blog_json[counter] = create_review_object(review)
 		counter += 1
 	
+	# Save reviews
 	savefile = f"{BLOG_PATH}/reviews.json" 
 	with open(savefile, "w") as f:
 		f.write(json.dumps(blog_json))
 		f.close()
 	os.chmod(savefile, 0o755)
+
+	# Save extra info
+	infofile = f"{BLOG_PATH}/information.json"
+	with open(infofile, "w") as f:
+		f.write(json.dumps(create_info_object()))
+		f.close()
+	os.chmod(infofile, 0o755)
 

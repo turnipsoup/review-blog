@@ -4,7 +4,16 @@ $.getJSON('http://galleywest.sdf.org/reviews.json', function(data) {
 		addReviewToMainPage(data[i], i)
 		$(".mainholder").append("<hr class='review-split'>")
 	}
+
+	getAndDisplayInfo()
+
 });
+
+function getAndDisplayInfo(){
+	$.getJSON('http://galleywest.sdf.org/information.json', function(data) {
+		$("<center class='infoarea'></center>").html("<i>All rights reserved to the author. Page last modifed at: " + data["update_time"] + ". Served from " + data["platform"] + "."  + "</i>").appendTo(".mainholder")
+	});
+}
 
 
 function addReviewToMainPage(review, divid) {

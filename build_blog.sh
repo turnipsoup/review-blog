@@ -9,8 +9,8 @@ fi
 
 BLOG_PATH=$1
 INDEX_FILE="$BLOG_PATH/index2.html"
-#AWK_FILE="$BLOG_PATH/create_website.awk"
-AWK_FILE=awk/create_website.awk
+AWK_FILE="$BLOG_PATH/create_website.awk"
+#AWK_FILE=awk/create_website.awk
 
 TOP_OF_HTML_FILE="
 <link rel='stylesheet' type='text/css' href='reviews.css'/>

@@ -8,7 +8,7 @@ if [[ -z $1 ]]; then
 fi
 
 BLOG_PATH=$1
-INDEX_FILE="$BLOG_PATH/index2.html"
+INDEX_FILE="$BLOG_PATH/index.html"
 AWK_FILE="$BLOG_PATH/create_website.awk"
 #AWK_FILE=awk/create_website.awk
 
@@ -28,12 +28,17 @@ END_OF_HTML_FILE="
 </html>
 "
 
+PAGE_FOOTER="<center><i>All rights reserved to the author. Page last modifed at $(date). Served from $(cat /etc/release | head -n 1 | awk '{print $1}').</i></center>"
+
 rm $INDEX_FILE
 
 echo $TOP_OF_HTML_FILE >> $INDEX_FILE
 
-for i in $(ls -d reviews/*); do 
+for i in $(ls -d $BLOG_PATH/reviews/*); do 
     awk -f $AWK_FILE $i >> $INDEX_FILE; 
 done
 
 echo $END_OF_HTML_FILE >> $INDEX_FILE
+echo $PAGE_FOOTER >> $INDEX_FILE
+
+chmod 755 $INDEX_FILE
